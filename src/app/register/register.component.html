@@ -1,0 +1,94 @@
+<div class="container">
+	<h4>Register</h4>
+	
+	<form #regForm="ngForm" (ngSubmit)="onSubmit(regForm.form)">
+
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="in_email">Email</label>
+				<span class="glyphicon glyphicon-envelope"></span>
+				<input #emailRef="ngModel" type="text" class="form-control" id="in_email" name="email" minlength="5" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ngModel required>
+				<div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)" class="alert alert-danger">
+					<div [hidden]="!emailRef.errors.required">
+						Email address is required
+					</div>
+					<div [hidden]="!emailRef.errors.minlength">
+						Email must be at least 5 characters long.
+					</div>
+					<div [hidden]="!emailRef.errors.pattern">
+						Email format is invalid
+					</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="in_name">Name</label>
+				<input #nameRef="ngModel" type="text" class="form-control" id="in_name" name="name" minlength="5" ngModel required>
+				<div *ngIf="nameRef.errors && (nameRef.dirty || nameRef.touched)" class="alert alert-danger">
+					<div [hidden]="!nameRef.errors.required">
+						Name is required
+					</div>
+					<div [hidden]="!nameRef.errors.minlength">
+						Name must be at least 5 characters long.
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="in_surname">Surname</label>
+				<input #surnameRef="ngModel" type="text" class="form-control" id="in_surname" name="surname" minlength="5" ngModel required>
+				<div *ngIf="surnameRef.errors && (surnameRef.dirty || surnameRef.touched)" class="alert alert-danger">
+					<div [hidden]="!surnameRef.errors.required">
+						Surname is required
+					</div>
+					<div [hidden]="!surnameRef.errors.minlength">
+						Surname must be at least 5 characters long.
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="in_password">Password</label>
+				<input #passRef="ngModel" type="password" class="form-control" id="in_password" name="password" minlength="5" ngModel required>
+				
+				<div *ngIf="passRef.errors && (passRef.dirty || passRef.touched)" class="alert alert-danger">
+					<div [hidden]="!passRef.errors.required">
+						Password is required
+					</div>
+					<div [hidden]="!passRef.errors.minlength">
+						Password must be at least 5 characters long.
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<label for="in_confirmpassword">Confirm password</label>
+				<input #confirmpassRef="ngModel" type="password" validateEqual="password" class="form-control" id="in_confirmpassword" name="confirmpassword" minlength="5" ngModel required>
+				
+				<div *ngIf="confirmpassRef.errors && (confirmpassRef.dirty || confirmpassRef.touched)" class="alert alert-danger">
+					<div [hidden]="confirmpassRef.valid">
+						Confirm passowrd must match the password above
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<button class="form-control" type="submit" [disabled]="regForm.form.invalid">Register</button>
+			</div>
+		</div>
+
+  </form>
+</div>
