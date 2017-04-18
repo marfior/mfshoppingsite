@@ -1,4 +1,8 @@
 <div class="container">
+
+	<div *ngIf="this.incorrectLogin" class="alert alert-danger">
+				Incorrect email or password
+	</div>
 	
 	<form #regForm="ngForm" (ngSubmit)="onSubmit(regForm.form)">
 	
@@ -42,16 +46,16 @@
 	<div class="form-group">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="alert alert-warning">
-			Don't have an account? <a href="#" [routerLink]="['/register']" routerLinkActive="active">Sign Up Now</a>
+				Don't have an account? <a href="#" [routerLink]="['/register']" routerLinkActive="active">Sign Up Now</a>
 			</div>
 		</div>
-    </div>
+	</div>
 
-    <div class="form-group">
+	<div class="form-group">
 		<div class="col-md-6 col-md-offset-3">
-			<button class="form-control" type="submit" [disabled]="regForm.form.invalid">Sign in</button>
+			<button class="form-control" type="submit" [disabled]="regForm.form.invalid || this.signingIn">Sign in</button>
 		</div>
-    </div>
+	</div>
 
   </form>
 </div>
