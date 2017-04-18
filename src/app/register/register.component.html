@@ -1,7 +1,7 @@
 <div class="container">
 	<h4>Register</h4>
 	
-	<form #regForm="ngForm" (ngSubmit)="onSubmit(regForm.form)">
+	<form #regForm="ngForm" (ngSubmit)="!disableButton && onSubmit(regForm.form)">
 
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-3">
@@ -56,7 +56,7 @@
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-3">
 				<label for="in_password">Password</label>
-				<input #passRef="ngModel" type="password" class="form-control" id="in_password" name="password" minlength="5" ngModel required>
+				<input #passRef="ngModel" type="password" class="form-control" id="in_password" name="password" minlength="5" ngModel required reverse="true" appEqualValidator="confirmPassword" >
 				
 				<div *ngIf="passRef.errors && (passRef.dirty || passRef.touched)" class="alert alert-danger">
 					<div [hidden]="!passRef.errors.required">
@@ -73,11 +73,11 @@
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-3">
 				<label for="in_confirmpassword">Confirm password</label>
-				<input #confirmpassRef="ngModel" type="password" validateEqual="password" class="form-control" id="in_confirmpassword" name="confirmpassword" minlength="5" ngModel required>
+				<input #confirmpassRef="ngModel" type="password" appEqualValidator="password" class="form-control" id="in_confirmpassword" name="confirmpassword" minlength="5" ngModel required>
 				
 				<div *ngIf="confirmpassRef.errors && (confirmpassRef.dirty || confirmpassRef.touched)" class="alert alert-danger">
-					<div [hidden]="confirmpassRef.valid">
-						Confirm passowrd must match the password above
+					<div [hidden]="confirmpassRef.valid || (confirmpassRef.pristine && !regForm.submitted)">
+						Confirm password must match the password above
 					</div>
 				</div>
 				
@@ -86,7 +86,7 @@
 
 		<div class="form-group">
 			<div class="col-md-6 col-md-offset-3">
-				<button class="form-control" type="submit" [disabled]="regForm.form.invalid">Register</button>
+				<button class="form-control" type="submit" [disabled]="regForm.form.invalid || this.registering">Register</button>
 			</div>
 		</div>
 
