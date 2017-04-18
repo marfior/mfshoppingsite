@@ -1,43 +1,36 @@
 import { Injectable } from '@angular/core';
-import { User } from "./user";
+import { User } from "./Models/user";
 import {Http} from "@angular/http";
 import 'rxjs/add/operator/map';
 
+import { FirebaseListObservable } from 'angularfire2';
+
+import { AngfirebaseService } from '../Services/angfirebase.service';
+
 @Injectable()
 export class UserService {
-
-	constructor(private httpServ: Http) 
-	{ 
+	
+	constructor(private httpServ: Http,private afs: AngfirebaseService) { 
+		
 	}
 
-  /*
+	public getUserByEmail(user: User)
+	{
+			  //debugger;
+		return this.afs.af.database.list('/users',{ 
+									query: {
+										orderByChild: 'email',
+										equalTo: user.email, 
+									}
+								}).map( 
+										(arrUsers) => <User>arrUsers[0] 
+										);
+
+	}
+
+	
 	public addUser(user: User)
 	{
-		this.httpServ.post("http://localhost:3000/users",
-		{
-			id: user.id,
-			email: user.email,
-			name: user.name,
-			surname: user.surname,
-			password: user.password
-		},{}).subscribe();
-
-	}
-	  
-	
-
-	  
-	public getAll()
-	{  // get data using a restful API
-		return  this.httpServ.get("http://localhost:3000/users")
-					  .map(responseObj => responseObj.json()
-						  //.map(jsonToDo => new ToDo(jsonToDo) )
-					  )
-	}
-	*/
-	
-	public getUser(id: number)
-	{
-		return this.httpServ.get("http://localhost:3000/users/" + id).subscribe();
+		this.afs.af.database.list("/users").push(user);
 	}
 }
