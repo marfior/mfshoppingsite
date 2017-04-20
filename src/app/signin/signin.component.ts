@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
 
 import { User } from "../Services/Models/user";
 import { UserService } from "../Services/user.service";
@@ -13,12 +13,12 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 })
 export class SigninComponent implements OnInit {
 	
-	private user: User = new User(0,"","","","");
+	@Output() onSigningIn : EventEmitter<User> = new EventEmitter();
+
+	private user: User = new User("","","","");
 	private incorrectLogin: boolean = false;
 	private signingIn: boolean = false;
 	
-	items: FirebaseListObservable<any[]>;
-
 	constructor(private userService: UserService, private router: Router) {
 		
 	}
@@ -39,6 +39,7 @@ export class SigninComponent implements OnInit {
 							if (userRes != null && this.user.password == userRes.password)
 							{
 								//this.router.navigateByUrl('home');
+								this.onSigningIn.emit(this.user);
 							}
 							else
 							{
@@ -49,14 +50,6 @@ export class SigninComponent implements OnInit {
 
 				}
 		);
-
-			
-			/*.then( (usr) => {
-			if (usr.id > 0)
-				
-			else
-				
-		});*/
 
 		
 	}
