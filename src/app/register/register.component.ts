@@ -18,8 +18,9 @@ export class RegisterComponent implements OnInit {
 	passwordControl = new FormControl('',Validators.required);
 	confirmpassControl = new FormControl('',Validators.required);
   
-	private user: User = new User(0,"","","","");
+	private user: User = new User("","","","");
 	private registering: boolean = false;
+	private emailAlreadyTaken: boolean = false;
 	
 
 	constructor(private userService: UserService, private router: Router) { 
@@ -36,13 +37,24 @@ export class RegisterComponent implements OnInit {
 		this.user.surname = form.controls.surname.value;
 		this.user.password = form.controls.password.value;
 		
-		this.userService.addUser(this.user);
-		
+		// if email already exists do not and show error
+		this.userService.getUserByEmail(this.user)
+					.subscribe(	(userRes) => {
+								debugger;
+								if (userRes != null && this.user.email == userRes.email)
+								{
+									this.emailAlreadyTaken = true;
+									this.registering = false;
+								}
+								else
+								{
+									this.emailAlreadyTaken = false;
+									this.userService.addUser(this.user);
+								}
+					});
+
+
 		//this.router.navigateByUrl('signin');
-		//console.log(user);
-		//console.log(this.myGroup);
-		//console.log(this.myGroup.value.name);
-		//debugger;
 
 
 	}
