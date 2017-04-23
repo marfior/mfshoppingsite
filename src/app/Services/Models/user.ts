@@ -2,6 +2,7 @@
 
 export class User {
 	
+	key: string;
 	email: string;
 	name: string;
 	surname: string;
@@ -12,8 +13,9 @@ export class User {
 	}
 	*/
 	
-	constructor(email: string,name: string,surname: string,password: string) 
+	constructor(key: string,email: string,name: string,surname: string,password: string) 
 	{
+		this.key = key;
 		this.email = email;
 		this.name = name;
 		this.surname = surname;
@@ -26,10 +28,12 @@ export class User {
 	}
 	*/
 
-	public doSomething() {
-
-		console.log("testing");
-
-
-	}
+	/*public fillUser(userObj) 
+	{
+		this.key = userObj.$key;
+		this.email = userObj.email;
+		this.name = userObj.name;
+		this.surname = userObj.surname;
+		this.password = userObj.password;
+	}*/
 }
