@@ -15,7 +15,7 @@ export class SigninComponent implements OnInit {
 	
 	@Output() onSigningIn : EventEmitter<User> = new EventEmitter();
 
-	private user: User = new User("","","","");
+	private user: User = new User("","","","","");
 	private incorrectLogin: boolean = false;
 	private signingIn: boolean = false;
 	
@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
 		this.user.email = form.controls.email.value;
 		this.user.password = form.controls.password.value;
 		
-		//debugger;
+		debugger;
 		this.userService.getUserByEmail(this.user)
 				.subscribe(	(userRes) => {
 							//console.log(userRes)

@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
 	passwordControl = new FormControl('',Validators.required);
 	confirmpassControl = new FormControl('',Validators.required);
   
-	private user: User = new User("","","","");
+	private user: User = new User("","","","","");
 	private registering: boolean = false;
 	private emailAlreadyTaken: boolean = false;
 	
