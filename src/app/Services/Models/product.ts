@@ -2,16 +2,19 @@
 
 export class Product {
 	
+	key: string;
 	name: string;
 	price: number;
-	stock: number;
+	category: string;
 	description: string;
+	imageUrl: string
 	
-	constructor(name: string,price: number,	stock: number,	description: string) 
+	constructor(key: string, name: string,price: number,	category: string,	description: string) 
 	{
+		this.key = key;
 		this.name = name;
 		this.price = price;
-		this.stock = stock;
+		this.category = category;
 		this.description = description;
 	}
 	/*
