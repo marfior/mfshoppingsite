@@ -1,0 +1,17 @@
+
+
+<div class="container" *ngIf="product">
+  
+  <div style="float:left;">
+    <div style="float:left;">
+      <img src="../assets/images/products/{{category}}/{{product.key}}.jpg" alt="Sorry no image available">
+    </div>
+    <span>Description: {{product?.description}}</span>
+    <span>Price: {{product?.price}}</span>
+
+    <input type="number" min="1" [(ngModel)]="quantity" >
+
+    <button class="form-control" type="submit" [disabled]="quantity <= 0 || this.registering" onclick="addToCart()">Add to Cart</button>
+  
+  </div>
+</div>

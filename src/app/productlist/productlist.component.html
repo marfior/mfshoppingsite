@@ -1,0 +1,16 @@
+
+<div class="container">
+  <a href="" [routerLink]="['/productlist',category]">{{category}}</a>
+
+  <ul *ngFor="let product of arrProducts" class="list-inline">
+    <li>
+        <div style="width: 250px;">{{product.name}}</div>
+        <a [routerLink]="['/product',category,product.$key]" href="#" title="{{product.name}}" >
+          <img src="../assets/images/products/{{category}}/{{product.$key}}.jpg" style="width:250px;height:200px;" alt="Sorry no image available">
+        </a>
+        <span>Price: {{product.price}}</span>
+  
+    </li>
+  </ul>
+
+</div>

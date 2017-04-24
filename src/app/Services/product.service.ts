@@ -17,12 +17,26 @@ export class ProductService {
 
   }
 
-
-  public addProduct(product: Product)
+  public listProducts(category: string, query: Object)
   {
-		this.afs.af.database.list("/products").push(product);
-	}
+    return this.afs.af.database.list("/products/" + category,query);
+  }
 
+  public getProductByKey(category: string, key: string)
+  {
+    return this.listProducts(category,{ 
+									query: {
+										orderByKey: 'key',
+										equalTo: key, 
+									}
+								}).map( 
+										(arrProducts) => arrProducts
+										);
+  }
+
+  /*public addProduct(product: Product)  {
+		this.listProducts(null).push(product);
+	}*/
 
   public search(term): Observable<any> {
 
@@ -32,7 +46,7 @@ export class ProductService {
 										equalTo: term, 
 									}
 								}).map( 
-										(arrUsers) => arrUsers
+										(arrResults) => arrResults
 										);
 
     if (term.length == 1){

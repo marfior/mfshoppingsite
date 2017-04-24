@@ -19,6 +19,9 @@ import {SharedModule} from "./Services/shared.module";
 
 import { EqualValidatorDirective } from './Directives/equal-validator.directive';
 import { HomeComponent } from './home/home.component';
+import { ProductlistComponent } from './productlist/productlist.component';
+import { ProductComponent } from './product/product.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     SigninComponent,
     EqualValidatorDirective,
-    HomeComponent
+    HomeComponent,
+    ProductlistComponent,
+    ProductComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
