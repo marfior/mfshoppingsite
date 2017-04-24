@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
 
 	public isUserLoggedIn: boolean = false;
 
-  private arrResults = [];
+  private arrSearchRes = [];
   private productName: string;
 
   private term$ = new Subject();
@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(term => {
         this.productService.search(this.productName).subscribe(results => {
-          this.arrResults = results;
+          this.arrSearchRes = results;
         })
       });
   }

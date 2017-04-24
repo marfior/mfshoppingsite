@@ -14,13 +14,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#" [routerLink]="['/productlist','laptops']">Laptops <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="#" [routerLink]="['/productlist','phones']">Phones <span class="sr-only">(current)</span></a></li>
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="#">Smart phones</a></li>
+            <li><a href="#">Laptops</a></li>
+            <li><a href="#">Keyboards</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li role="separator" class="divider"></li>
@@ -28,13 +30,17 @@
           </ul>
         </li>
       </ul>
-      <div class="form-group">
+      <div class="form-group navbar-form navbar-left">
         <input type="text" class="form-control" [(ngModel)]="productName" (keydown)="onSearch()" placeholder="Search" >
+        <div *ngIf="arrSearchRes.length > 0" style="display: block;">
+            <ul>
+              <li *ngFor="let arrRes of arrSearchRes">{{arrRes.name}}</li>
+            </ul>
+        </div>    
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-     
+      
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="isUserLoggedIn" ><a href="#">Shopping cart</a></li>
+        <li *ngIf="isUserLoggedIn || true" class="glyphicon glyphicon-shopping-cart"><a href="#">Shopping cart</a></li>
 		<li><a href="#"	[routerLink]="['/signin']" routerLinkActive="active">Sign In</a></li>
 		<!--
         <li class="dropdown">
@@ -55,7 +61,3 @@
 
 
 
-
-<ul >
-    <li *ngFor="let arr of arrResults">{{arr.name}}</li>
-</ul>
