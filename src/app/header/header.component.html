@@ -14,6 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li class="active"><a href="#" [routerLink]="['/productlist','all']">All Products <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="#" [routerLink]="['/productlist','laptops']">Laptops <span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="#" [routerLink]="['/productlist','phones']">Phones <span class="sr-only">(current)</span></a></li>
         
@@ -34,14 +35,17 @@
         <input type="text" class="form-control" [(ngModel)]="productName" (keydown)="onSearch()" placeholder="Search" >
         <div *ngIf="arrSearchRes.length > 0" style="display: block;">
             <ul>
-              <li *ngFor="let arrRes of arrSearchRes">{{arrRes.name}}</li>
+              <li *ngFor="let arrRes of arrSearchRes">
+                {{arrRes.name}}
+              </li>
             </ul>
         </div>    
       </div>
       
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="isUserLoggedIn || true" class="glyphicon glyphicon-shopping-cart"><a href="#">Shopping cart</a></li>
-		<li><a href="#"	[routerLink]="['/signin']" routerLinkActive="active">Sign In</a></li>
+        <li *ngIf="this.userService.userLogged.$key != undefined">Welcome {{this.userService.userLogged.name}}!</li>
+        <li *ngIf="this.userService.userLogged.$key != undefined"><a href="#" class="glyphicon glyphicon-shopping-cart"></a></li>
+		    <li><a href="#"	[routerLink]="['/signin']" routerLinkActive="active">Sign In</a></li>
 		<!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

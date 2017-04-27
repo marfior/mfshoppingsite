@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 
 import { Product } from "../Services/Models/product";
 import { ProductService } from "../Services/product.service";
+import { UserService } from "../Services/user.service";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
   private term$ = new Subject();
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private userService: UserService) {
 
     this.term$
       .debounceTime(500)
