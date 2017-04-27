@@ -1,0 +1,82 @@
+
+<h4>Shopping cart</h4>
+
+<div class="container">
+
+    <div class="col-md-2">
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Item</div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Price</div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Qty</div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Total</div>
+      </div>
+    </div>
+
+    <!--<li *ngFor="let arrRes of arrSearchRes">
+      {{arrRes.name}}
+    </li>-->
+</div>
+
+<div class="container">
+    <div class="col-md-2">
+      <img src="../assets/images/products/{{product?.$key}}.jpg" alt="Sorry no image available" style="width: 100px; height:100px;">
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{product?.name}}</div>
+        <div class="panel-body">{{product?.description}}</div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{product?.price}}</div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{product?.price}}</div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{producttotal}}</div>
+      </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="col-md-12 col-md-offset">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{subtotal}}</div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-md-offset">
+      <button class="btn-primary form-control" type="submit" [disabled]="this.checkingOut" 
+        (click)="checkOut()">Checkout</button>
+    </div>
+</div>
