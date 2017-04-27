@@ -13,15 +13,15 @@ import { User } from "../Services/Models/user";
 })
 export class RegisterComponent implements OnInit {
 	
-	registrationGroup: FormGroup;
+	/*registrationGroup: FormGroup;
 
 	passwordControl = new FormControl('',Validators.required);
-	confirmpassControl = new FormControl('',Validators.required);
+	confirmpassControl = new FormControl('',Validators.required);*/
   
-	private user: User = new User("","","","","");
+	public user: User = <User>{};
 	private registering: boolean = false;
 	private emailAlreadyTaken: boolean = false;
-	
+	private error: boolean = false;
 
 	constructor(private userService: UserService, private router: Router) { 
 	}
@@ -29,18 +29,24 @@ export class RegisterComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	onSubmit(form)
+	onSubmit(form: FormGroup)
 	{
+		debugger;
+		
 		this.registering = true;
-		this.user.email = form.controls.email.value;
+		this.error = false;
+
+		this.user.email = "sfdf";//form.controls.email.value;
+		this.user.password = "dfsdf";//form.controls.password.value;
+
+		/*this.user.email = form.controls.email.value;
 		this.user.name = form.controls.name.value;
 		this.user.surname = form.controls.surname.value;
-		this.user.password = form.controls.password.value;
+		this.user.password = form.controls.password.value;*/
 		
-		// if email already exists do not and show error
+		// if email already exists do not add and show error
 		this.userService.getUserByEmail(this.user)
-					.subscribe(	(userRes) => {
-								debugger;
+						.subscribe(	(userRes) => {
 								if (userRes != null && this.user.email == userRes.email)
 								{
 									this.emailAlreadyTaken = true;
@@ -51,7 +57,8 @@ export class RegisterComponent implements OnInit {
 									this.emailAlreadyTaken = false;
 									this.userService.addUser(this.user);
 								}
-					});
+						},(error) => this.error = true
+						).unsubscribe();
 
 
 		//this.router.navigateByUrl('signin');
