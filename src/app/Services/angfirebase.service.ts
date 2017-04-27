@@ -17,7 +17,7 @@ export class AngfirebaseService {
     this.af.auth.logout();
   }
 
-  list(url: string, query: Object) : FirebaseListObservable<any>
+  list(url: string, query: Object)
   {
       return this.af.database.list(url, query);
                              // .map(responseObj => responseObj.json() );
@@ -26,6 +26,26 @@ export class AngfirebaseService {
   object(url: string, query: Object)
   {
       return this.af.database.object(url, query);
+  }
+
+  getQueryByChild(child: string, value: string)
+  {
+    return { 
+              query: {
+                orderByChild: child,
+                equalTo: value, 
+              }
+            }
+  }
+
+  getQueryByKey(key: string, value: string)
+  {
+    return { 
+              query: {
+                orderByKey: key,
+                equalTo: value, 
+              }
+            }
   }
 
 }
