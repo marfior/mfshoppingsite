@@ -10,5 +10,5 @@ export const appRoutes: Routes = [
   { path: 'signin', component: SigninComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'productlist/:category', component: ProductlistComponent},
-  { path: 'product/:category/:key', component: ProductComponent},
+  { path: 'product/:key', component: ProductComponent},
 ];
