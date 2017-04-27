@@ -23,10 +23,11 @@ export class ProductlistComponent implements OnInit {
   }
 
   ngOnInit() {
-debugger;
+
     this.actRoute.params.subscribe(par => {
         this.category = par["category"];
-        this.productService.listProducts(this.category,"").subscribe(
+
+        this.productService.getProductsByCategory(this.category).subscribe(
           (arrResults) => this.arrProducts = arrResults
         );
       });
