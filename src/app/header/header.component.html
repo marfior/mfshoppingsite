@@ -2,50 +2,30 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href="#">MF Hardware</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#" [routerLink]="['/productlist','all']">All Products <span class="sr-only">(current)</span></a></li>
-        <li class="active"><a href="#" [routerLink]="['/productlist','laptops']">Laptops <span class="sr-only">(current)</span></a></li>
-        <li class="active"><a href="#" [routerLink]="['/productlist','phones']">Phones <span class="sr-only">(current)</span></a></li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Products <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Smart phones</a></li>
-            <li><a href="#">Laptops</a></li>
-            <li><a href="#">Keyboards</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
+        <li appHighlightmenu [class.active]="active('all')"><a href="#" [routerLink]="['/productlist','all']" (click)="activate('all')">All Products</a></li>
+        <li appHighlightmenu [class.active]="active('laptops')"><a href="#" [routerLink]="['/productlist','laptops']" (click)="activate('laptops')">Laptops</a></li>
+        <li appHighlightmenu [class.active]="active('phones')"><a href="#" [routerLink]="['/productlist','phones']" (click)="activate('phones')">Phones</a></li>
+        <li appHighlightmenu [class.active]="active('tablets')"><a href="#" [routerLink]="['/productlist','tablets']" (click)="activate('tablets')">Tablets</a></li>
       </ul>
       <div class="form-group navbar-form navbar-left">
-        <input type="text" class="form-control" [(ngModel)]="productName" (keydown)="onSearch()" placeholder="Search" >
-        <div *ngIf="arrSearchRes.length > 0" style="display: block;">
-            <ul>
-              <li *ngFor="let arrRes of arrSearchRes">
-                {{arrRes.name}}
-              </li>
-            </ul>
-        </div>    
+        <input type="text" class="form-control" [(ngModel)]="productName" (mousedown)="onStartSearch()" (input)="onSearch()" placeholder="Search products" >    
       </div>
       
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="this.userService.userLogged.$key != undefined">Welcome {{this.userService.userLogged.name}}!</li>
-        <li *ngIf="this.userService.userLogged.$key != undefined"><a href="#" class="glyphicon glyphicon-shopping-cart"></a></li>
-		    <li><a href="#"	[routerLink]="['/signin']" routerLinkActive="active">Sign In</a></li>
+        <li *ngIf="this.userService.userLogged.$key != undefined"><a href="#" disabled>Welcome {{this.userService.userLogged.name}}!</a></li>
+        <li *ngIf="this.userService.userLogged.$key != undefined"><a href="#" title="Shopping cart" [routerLink]="['/shoppingcart']" class="glyphicon glyphicon-shopping-cart">  [(ngModel)]="countProductscart"</a></li>
+		    <li>
+          <a href="#"	[routerLink]="['/signin']" routerLinkActive="active">
+            <span *ngIf="this.userService.userLogged.$key == undefined">Sign In</span>
+            <!--<span *ngIf="this.userService.userLogged.$key != undefined">Logout</span>-->
+          </a>
+        </li>
 		<!--
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>

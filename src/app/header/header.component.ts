@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {Subject} from "rxjs";
+import { Subject } from "rxjs";
+import { Router } from '@angular/router';
 
 import { Product } from "../Services/Models/product";
 import { ProductService } from "../Services/product.service";
+import { ProductcartService } from "../Services/productcart.service";
 import { UserService } from "../Services/user.service";
 
 
@@ -13,31 +15,51 @@ import { UserService } from "../Services/user.service";
 })
 export class HeaderComponent implements OnInit {
 
-	public isUserLoggedIn: boolean = false;
+  private activeHeader: string = "";
 
   private arrSearchRes = [];
   private productName: string;
 
-  private term$ = new Subject();
+  private countProductscart: number = 0;
 
-  constructor(private productService: ProductService, private userService: UserService) {
+  
+  constructor(private productService: ProductService
+            , private userService: UserService
+            , private productcartService: ProductcartService
+            , private router: Router) {
 
-    this.term$
-      .debounceTime(500)
-      .distinctUntilChanged()
-      .subscribe(term => {
-        this.productService.search(this.productName).subscribe(results => {
-          this.arrSearchRes = results;
-        })
-      });
+     this.productcartService.getProductscartByUser(this.userService.userLogged.$key)
+                               .subscribe( (productsRes) => this.countProductscart = productsRes.length );
   }
 
   ngOnInit() {
   }
 
+  onStartSearch()
+  {
+    this.router.navigateByUrl('productlist');
+  }
+
   onSearch()
 	{
-    this.term$.next(this.productName);
+    this.productService.search(this.productName);
+  }
+
+  active(headerStr) : boolean
+  {
+    if (headerStr == this.activeHeader)
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  activate(headerStr)
+  {
+    this.activeHeader = headerStr;
   }
 
 }
