@@ -1,28 +1,11 @@
 
 
-export class Product {
+export interface Product {
 	
-	key: string;
-	name: string;
-	price: number;
+	$key: string;
 	category: string;
 	description: string;
-	imageUrl: string
-	
-	constructor(key: string, name: string,price: number,	category: string,	description: string) 
-	{
-		this.key = key;
-		this.name = name;
-		this.price = price;
-		this.category = category;
-		this.description = description;
-	}
-	/*
-	constructor(jsonResponse: any) {
-	this.id = jsonResponse.id;
-	this.todotext= jsonResponse.todotext;
-	}
-	*/
-
+	name: string;
+	price: number;
 
 }
