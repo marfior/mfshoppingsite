@@ -15,13 +15,14 @@ import { HeaderComponent } from './header/header.component';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 
-import {SharedModule} from "./Services/shared.module";
+import { SharedModule } from "./Services/shared.module";
 
 import { EqualValidatorDirective } from './Directives/equal-validator.directive';
 import { HomeComponent } from './home/home.component';
 import { ProductlistComponent } from './productlist/productlist.component';
 import { ProductComponent } from './product/product.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { HighlightmenuDirective } from './Directives/highlightmenu.directive';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     HomeComponent,
     ProductlistComponent,
     ProductComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    HighlightmenuDirective
   ],
   imports: [
     BrowserModule,
