@@ -10,11 +10,17 @@ import { Product } from "./Models/product";
 import { ProductService } from "./product.service";
 import { ProductcartService } from "./productcart.service";
 
+import { OrderService } from "./order.service";
+
 @NgModule({
   imports: [
 	CommonModule,
   ],
-  providers: [UserService, AngfirebaseService, ProductService, ProductcartService],
+  providers: [AngfirebaseService,
+              UserService,  
+              ProductService, 
+              ProductcartService,
+              OrderService],
   declarations: []
 })
 export class SharedModule { }

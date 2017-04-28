@@ -5,6 +5,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ProductlistComponent} from "./productlist/productlist.component";
 import {ProductComponent} from "./product/product.component";
 import {ShoppingcartComponent} from "./shoppingcart/shoppingcart.component";
+import {OrderComponent} from "./order/order.component";
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent},
@@ -14,4 +15,5 @@ export const appRoutes: Routes = [
   { path: 'productlist/:category', component: ProductlistComponent},
   { path: 'product/:key', component: ProductComponent},
   { path: 'shoppingcart', component: ShoppingcartComponent},
+  { path: 'order/:key', component: OrderComponent},
 ];

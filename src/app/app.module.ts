@@ -23,7 +23,8 @@ import { ProductlistComponent } from './productlist/productlist.component';
 import { ProductComponent } from './product/product.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { HighlightmenuDirective } from './Directives/highlightmenu.directive';
-
+import { FilterProductByKeyPipe } from './Pipes/filter-product-by-key.pipe';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,9 @@ import { HighlightmenuDirective } from './Directives/highlightmenu.directive';
     ProductlistComponent,
     ProductComponent,
     ShoppingcartComponent,
-    HighlightmenuDirective
+    HighlightmenuDirective,
+    FilterProductByKeyPipe,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

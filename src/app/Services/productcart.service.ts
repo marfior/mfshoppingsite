@@ -8,10 +8,7 @@ import { AngfirebaseService } from '../Services/angfirebase.service';
 @Injectable()
 export class ProductcartService {
 
-  // productcart: Productcart = <Productcart>{};
-
-
-  constructor(private afs: AngfirebaseService) {
+   constructor(private afs: AngfirebaseService) {
 
    }
 
@@ -33,6 +30,10 @@ export class ProductcartService {
 
   public updateProductscart(productcart: Productcart){
       this.listProductscart(undefined).update(productcart.$key,productcart);
+  }
+
+  public removeProductcart(key: string){
+      this.listProductscart(undefined).remove(key);
   }
 
   public getProductcart(productcart: Productcart)  {

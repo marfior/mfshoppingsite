@@ -1,83 +1,60 @@
+<div class="container" >
+  <h4>Shopping cart</h4>
+  
+  <div class="alert alert-info" *ngIf="userService.userLogged.$key == undefined">
+    Please register and login to be able to buy products and view the cart!
+  </div>
 
-<h4>Shopping cart</h4>
+  <div class="alert alert-info" *ngIf="userService.userLogged.$key != undefined && arrProductscart.length == 0">
+    There are no products in the cart
+  </div>
 
-<div class="alert alert-info" *ngIf="arrProductscart.length == 0">
-  Please register and login to be able to buy products and view the cart!
-</div>
+                
+  <table class="table" *ngFor="let productcart of arrProductscart">
+    <thead *ngIf="arrProductscart.indexOf(productcart) == 0">
+      <tr>
+        <th></th>
+        <th>Item</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
 
-<div class="container" *ngIf="arrProductscart.length > 0">
+    <tr *ngFor="let product of arrProducts | filterProductByKey:productcart?.productkey">
+      <td>
+        <img src="../assets/images/products/{{product?.$key}}.jpg" alt="Sorry no image available" style="width: 100px; height:100px;">
+      </td>
+      <td>
+        <div class="panel panel-default">
+          <div class="panel-heading">{{product?.name}}</div>
+          <div class="panel-body">{{product?.description}}</div>
+        </div>
+      </td>
+      <td>{{product?.price | currency:'EUR':true}}</td>
+      <td>{{productcart?.quantity}}</td>
+      <td>{{productcart?.totalprice | currency:'EUR':true}}</td>
+      <td><span class="glyphicon glyphicon-remove" (click)="removeProduct(productcart.$key)"></span></td>
+    </tr>
 
-    <div class="col-md-2">
-    </div>
+  </table>
+   
+  
 
-    <div class="col-md-4">
+  <div class="container" *ngIf="arrProductscart.length > 0">
+    
+    <div class="col-md-3 col-md-offset-9">
       <div class="panel panel-default">
-        <div class="panel-heading">Item</div>
+        <div class="panel-heading">{{order.totalprice | currency:'EUR':true}}</div>
       </div>
     </div>
 
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">Price</div>
-      </div>
+    <div class="col-md-3 col-md-offset-9">
+      <button class="btn-primary form-control" type="submit" [disabled]="this.checkingOut" (click)="checkOut()">Checkout</button>
     </div>
 
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">Qty</div>
-      </div>
-    </div>
+  </div>
+  
 
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">Total</div>
-      </div>
-    </div>
-
-</div>
-
-<div class="container" *ngFor="let productcart of arrProducts">
-    <div class="col-md-2">
-      <img src="../assets/images/products/{{productcart?.product.$key}}.jpg" alt="Sorry no image available" style="width: 100px; height:100px;">
-    </div>
-
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{productcart?.product.name}}</div>
-        <div class="panel-body">{{productcart?.product.description}}</div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{productcart?.product.price}}</div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{productcart?.product.price}}</div>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{producttotal}}</div>
-      </div>
-    </div>
-
-</div>
-
-
-<div class="container">
-    <div class="col-md-12 col-md-offset">
-      <div class="panel panel-default">
-        <div class="panel-heading">{{subtotal}}</div>
-      </div>
-    </div>
-
-    <div class="col-md-12 col-md-offset">
-      <button class="btn-primary form-control" type="submit" [disabled]="this.checkingOut" 
-        (click)="checkOut()">Checkout</button>
-    </div>
 </div>
