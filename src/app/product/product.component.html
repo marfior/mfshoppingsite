@@ -1,7 +1,11 @@
 
 <div class="container">
 
-    <div class="col-md-6">
+    <div [hidden]="!this.error" class="alert alert-danger">
+			An Error occurred trying to add product to cart. Please try again!
+		</div>
+
+    <div class="col-md-6" *ngIf="product != undefined">
       <img src="../assets/images/products/{{product?.$key}}.jpg" alt="Sorry no image available">
     </div>
 
@@ -18,10 +22,10 @@
 
       <div *ngIf="this.userService.userLogged.$key != undefined">
           <div class="col-md-4">
-            <input class="form-control" type="number" value="1" min="1" [(ngModel)]="quantity"  >
+            <input class="form-control" type="number" value="1" min="1" [(ngModel)]="productcart.quantity"  >
           </div>
           <div class="col-md-8">
-            <button class="btn-primary form-control" type="submit" [disabled]="this.quantity <= 0 || this.addingToCart" 
+            <button class="btn-primary form-control" type="submit" [disabled]="productcart.quantity <= 0 || this.addingToCart" 
               (click)="addToCart()">Add to Cart</button>
           </div>
         
