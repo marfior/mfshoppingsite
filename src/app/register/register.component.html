@@ -1,6 +1,5 @@
 <div class="container">
-	<h4>Register</h4>
-	
+
 	<form #regForm="ngForm" (ngSubmit)="!disableButton && onSubmit(regForm.form)">
 
 		<div [hidden]="!this.error" class="alert alert-danger">
@@ -8,6 +7,10 @@
 		</div>
 
 		<div class="form-group">
+			<div class="col-md-6 col-md-offset-3">
+				<h4>Register</h4>
+			</div>
+
 			<div class="col-md-6 col-md-offset-3">
 				<label for="in_email">Email</label>
 				<span class="glyphicon glyphicon-envelope"></span>
