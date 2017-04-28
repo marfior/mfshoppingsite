@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 import { User } from "../Services/Models/user";
 import { UserService } from "../Services/user.service";
@@ -12,8 +12,6 @@ import { UserService } from "../Services/user.service";
 })
 export class SigninComponent implements OnInit {
 	
-	/*@Output() onSigningIn : EventEmitter<User> = new EventEmitter();
-*/
 	private user: User = <User>{};
 	private incorrectLogin: boolean = false;
 	private signingIn: boolean = false;
@@ -26,7 +24,7 @@ export class SigninComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	onSubmit(form: FormGroup)
+	onSubmit(form)
 	{
 		this.signingIn = true;
 		this.user.email = form.controls.email.value;
@@ -37,14 +35,11 @@ export class SigninComponent implements OnInit {
 							//console.log(userRes)
 							if (userRes != null && this.user.password == userRes.password)
 							{
-								//this.router.navigateByUrl('home');
-								//this.onSigningIn.emit(this.user);
-								//this.userService.userKey = this.user.$key;
+								this.router.navigateByUrl('home');
 								this.userService.userLogged = userRes;
 							}
 							else
 							{
-								//this.router.navigateByUrl('signin');
 								this.incorrectLogin = true;
 							}
 							this.signingIn = false;
