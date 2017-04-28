@@ -1,7 +1,11 @@
 
 <h4>Shopping cart</h4>
 
-<div class="container">
+<div class="alert alert-info" *ngIf="arrProductscart.length == 0">
+  Please register and login to be able to buy products and view the cart!
+</div>
+
+<div class="container" *ngIf="arrProductscart.length > 0">
 
     <div class="col-md-2">
     </div>
@@ -30,32 +34,29 @@
       </div>
     </div>
 
-    <!--<li *ngFor="let arrRes of arrSearchRes">
-      {{arrRes.name}}
-    </li>-->
 </div>
 
-<div class="container">
+<div class="container" *ngFor="let productcart of arrProducts">
     <div class="col-md-2">
-      <img src="../assets/images/products/{{product?.$key}}.jpg" alt="Sorry no image available" style="width: 100px; height:100px;">
+      <img src="../assets/images/products/{{productcart?.product.$key}}.jpg" alt="Sorry no image available" style="width: 100px; height:100px;">
     </div>
 
     <div class="col-md-4">
       <div class="panel panel-default">
-        <div class="panel-heading">{{product?.name}}</div>
-        <div class="panel-body">{{product?.description}}</div>
+        <div class="panel-heading">{{productcart?.product.name}}</div>
+        <div class="panel-body">{{productcart?.product.description}}</div>
       </div>
     </div>
 
     <div class="col-md-2">
       <div class="panel panel-default">
-        <div class="panel-heading">{{product?.price}}</div>
+        <div class="panel-heading">{{productcart?.product.price}}</div>
       </div>
     </div>
 
     <div class="col-md-2">
       <div class="panel panel-default">
-        <div class="panel-heading">{{product?.price}}</div>
+        <div class="panel-heading">{{productcart?.product.price}}</div>
       </div>
     </div>
 
