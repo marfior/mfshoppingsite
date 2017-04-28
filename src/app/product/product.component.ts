@@ -16,7 +16,6 @@ export class ProductComponent implements OnInit {
 
   private addingToCart: boolean = false;
   private error: boolean = false;
-  //private quantity: number = 1;
 
   product: Product = <Product>{};
   productcart: Productcart = <Productcart>{};

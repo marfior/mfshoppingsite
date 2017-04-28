@@ -5,7 +5,7 @@
 			An Error occurred trying to add product to cart. Please try again!
 		</div>
 
-    <div class="col-md-6" *ngIf="product != undefined">
+    <div class="col-md-6" *ngIf="product.$key != undefined">
       <img src="../assets/images/products/{{product?.$key}}.jpg" alt="Sorry no image available">
     </div>
 
@@ -13,7 +13,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">{{product?.name}}</div>
         <div class="panel-body">{{product?.description}}</div>
-        <div class="panel-footer">Price: {{product?.price}}</div>
+        <div class="panel-footer">{{product?.price | currency:'EUR':true}}</div>
       </div>
       
       <div class="alert alert-info" *ngIf="this.userService.userLogged.$key == undefined">
