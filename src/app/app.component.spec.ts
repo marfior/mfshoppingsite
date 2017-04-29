@@ -6,12 +6,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { Router } from '@angular/router';
 
+let mockRouter = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
-class MockRouter {
-  navigateByUrl(url: string) { return url; }
-}
-
-describe('AppComponent', () => {
+fdescribe('AppComponent', () => {
 
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
@@ -22,28 +19,24 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        { provide: Router, useClass: MockRouter }
+        { provide: Router, useValue: mockRouter }
       ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     }).compileComponents()
   });
 
-  beforeEach(() => {
+  beforeEach(inject([Router], (router: Router) => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.debugElement.componentInstance;
-  });
+  }));
 
   it('should create the app', async(() => {
       expect(component).toBeTruthy();
     }) );
 
-
-  it('should tell Router to navigate to home page',async( ()=> {
-      inject([Router], (router: Router) => { 
-
-      const spy = spyOn(router, 'navigateByUrl');
-      const navurl = spy.calls.first().args[0];
+  it('should route to home page',async( ()=> {
+      const navurl = mockRouter.navigateByUrl.calls.first().args[0];
       expect(navurl).toBe('home');
-    } ) }));
+    }) ) ;
 
 } );
