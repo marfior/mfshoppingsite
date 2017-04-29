@@ -1,8 +1,13 @@
 <div class="container">
 
-	<div *ngIf="this.incorrectLogin" class="alert alert-danger">
-				Incorrect email or password
+	<div id="errIncorrectUser" [hidden]="!this.incorrectUser" class="alert alert-danger">
+		Email not yet registered!
 	</div>
+
+	<div id="errIncorrectPassword" [hidden]="!this.incorrectPassword" class="alert alert-danger">
+		Incorrect password!
+	</div>
+
 	
 	<form #regForm="ngForm" (ngSubmit)="onSubmit(regForm.form)">
 	

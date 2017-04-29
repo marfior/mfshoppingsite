@@ -13,7 +13,8 @@ import { UserService } from "../Services/user.service";
 export class SigninComponent implements OnInit {
 	
 	private user: User = <User>{};
-	private incorrectLogin: boolean = false;
+	private incorrectPassword: boolean = false;
+	private incorrectUser: boolean = false;
 	private signingIn: boolean = false;
 
 	
@@ -26,21 +27,25 @@ export class SigninComponent implements OnInit {
 
 	onSubmit(form)
 	{
+		this.incorrectUser = this.incorrectPassword = false;
 		this.signingIn = true;
 		this.user.email = form.controls.email.value;
 		this.user.password = form.controls.password.value;
 		
 		this.userService.getUserByEmail(this.user)
 						.subscribe(	(userRes) => {
-							//console.log(userRes)
-							if (userRes != null && this.user.password == userRes.password)
+							if (userRes != null && this.user.password == userRes.password)		// successful login
 							{
 								this.router.navigateByUrl('home');
 								this.userService.userLogged = userRes;
 							}
-							else
+							else if (userRes == null)											// user does not exist
 							{
-								this.incorrectLogin = true;
+								this.incorrectUser = true;
+							}
+							else if (userRes != null && this.user.password != userRes.password)	// incorrect password
+							{
+								this.incorrectPassword = true;
 							}
 							this.signingIn = false;
 
