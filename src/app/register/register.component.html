@@ -15,7 +15,7 @@
 				<label for="in_email">Email</label>
 				<span class="glyphicon glyphicon-envelope"></span>
 				<input #emailRef="ngModel" type="text" class="form-control" id="in_email" name="email" minlength="5" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" ngModel required>
-				<div [hidden]="!this.emailAlreadyTaken" class="alert alert-danger">
+				<div id="errEmailTaken" [hidden]="!this.emailAlreadyTaken" class="alert alert-danger">
 					Email address is already taken
 				</div>
 				<div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)" class="alert alert-danger">

@@ -26,8 +26,6 @@ export class RegisterComponent implements OnInit {
 
 	onSubmit(form)
 	{
-		debugger;
-		
 		this.registering = true;
 		this.error = false;
 
@@ -48,7 +46,7 @@ export class RegisterComponent implements OnInit {
 								{
 									this.emailAlreadyTaken = false;
 									this.userService.addUser(this.user);
-									this.router.navigateByUrl('signin');
+									this.router.navigateByUrl('home');
 								}
 								
 						},(err) => this.error = true                                    
