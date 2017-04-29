@@ -25,6 +25,7 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { HighlightmenuDirective } from './Directives/highlightmenu.directive';
 import { FilterProductByKeyPipe } from './Pipes/filter-product-by-key.pipe';
 import { OrderComponent } from './order/order.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -39,16 +40,17 @@ import { OrderComponent } from './order/order.component';
     ShoppingcartComponent,
     HighlightmenuDirective,
     FilterProductByKeyPipe,
-    OrderComponent
+    OrderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-	SharedModule,
-	AlertModule.forRoot(),
-	RouterModule.forRoot(appRoutes),
-	AngularFireModule.initializeApp(firebaseConfig)
+	  SharedModule,
+	  AlertModule.forRoot(),
+	  RouterModule.forRoot(appRoutes),
+	  AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
