@@ -15,8 +15,10 @@ let fakeProductService = jasmine.createSpyObj('ProductService',['getProductsByCa
 //let fakeActivatedRoute = jasmine.createSpyObj('ActivatedRoute',null);//, ['navigateByUrl']);
 
 class FakeActivatedRoute {
-  params: Observable<any> = Observable.from([{category: "all"}]);
+  params: Observable<any> = Observable.from([{category: "fakecategory"}]);
 }
+
+
 
 class FakeProductService {
 
@@ -24,15 +26,13 @@ class FakeProductService {
   public term$ = new Subject();
 
   getProductsByCategory(){
-    return Observable.of([{$key: "fakekeyprod",
-                          category: "fakeprodcateg",
-                          description: "fakeproddesc",
-                          name: "fakeprodname",
-                          price: 9999.99
-                          }]);
-
+    return this.getFakeProduct();                        //return Observable.of([null]);
   }
   searchProducts(){
+    return this.getFakeProduct();
+  }
+
+  private getFakeProduct(){
     return Observable.of([{$key: "fakekeyprod",
                           category: "fakeprodcateg",
                           description: "fakeproddesc",
@@ -40,6 +40,7 @@ class FakeProductService {
                           price: 9999.99
                           }]);
   }
+
 }
 
 
@@ -61,15 +62,17 @@ describe('ProductlistComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(inject([ProductService, ActivatedRoute], (productService : ProductService, actRoute: ActivatedRoute) => {
+  beforeEach( () => {
     fixture = TestBed.createComponent(ProductlistComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', async( ()=> {
     expect(component).toBeTruthy();
   }));
+
+  
 
 
   it('should render at least one product', async( ()=> {
