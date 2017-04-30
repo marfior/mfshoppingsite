@@ -15,8 +15,6 @@ import { UserService } from "../Services/user.service";
 })
 export class HeaderComponent implements OnInit {
 
-  private activeHeader: string = "";
-
   private arrSearchRes = [];
   private productName: string;
 
@@ -43,23 +41,6 @@ export class HeaderComponent implements OnInit {
   onSearch()
 	{
     this.productService.search(this.productName);
-  }
-
-  active(headerStr) : boolean
-  {
-    if (headerStr == this.activeHeader)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  activate(headerStr)
-  {
-    this.activeHeader = headerStr;
   }
 
 }

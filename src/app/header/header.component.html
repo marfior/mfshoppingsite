@@ -8,36 +8,27 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li appHighlightmenu [class.active]="active('all')"><a href="#" [routerLink]="['/productlist','all']" (click)="activate('all')">All Products</a></li>
-        <li appHighlightmenu [class.active]="active('laptops')"><a href="#" [routerLink]="['/productlist','laptops']" (click)="activate('laptops')">Laptops</a></li>
-        <li appHighlightmenu [class.active]="active('phones')"><a href="#" [routerLink]="['/productlist','phones']" (click)="activate('phones')">Phones</a></li>
-        <li appHighlightmenu [class.active]="active('tablets')"><a href="#" [routerLink]="['/productlist','tablets']" (click)="activate('tablets')">Tablets</a></li>
+        <li appHighlightmenu><a href="#" [routerLink]="['/productlist','all']" >All Products</a></li>
+        <li appHighlightmenu><a href="#" [routerLink]="['/productlist','laptops']" >Laptops</a></li>
+        <li appHighlightmenu><a href="#" [routerLink]="['/productlist','phones']" >Phones</a></li>
+        <li appHighlightmenu><a href="#" [routerLink]="['/productlist','tablets']" >Tablets</a></li>
       </ul>
       <div class="form-group navbar-form navbar-left">
         <input type="text" class="form-control" [(ngModel)]="productName" (mousedown)="onStartSearch()" (input)="onSearch()" placeholder="Search products" >    
       </div>
       
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="this.userService.userLogged.$key != undefined"><a href="#" disabled>Welcome {{this.userService.userLogged.name}}!</a></li>
-        <li *ngIf="this.userService.userLogged.$key != undefined"><a href="#" title="Shopping cart" [routerLink]="['/shoppingcart']" class="glyphicon glyphicon-shopping-cart">  [(ngModel)]="countProductscart"</a></li>
-		    <li>
+        <li *ngIf="this.userService.userLogged.$key != undefined"><a disabled>Welcome {{this.userService.userLogged.name}}!</a></li>
+        <li appHighlightmenu *ngIf="this.userService.userLogged.$key == undefined"><a [routerLink]="['/register']">Register</a></li>
+        <li appHighlightmenu *ngIf="this.userService.userLogged.$key != undefined">
+          <a disabled>{{countProductscart}} <a href="#" title="Shopping cart" [routerLink]="['/shoppingcart']" class="glyphicon glyphicon-shopping-cart"></a></a>
+        </li>
+		    <li *ngIf="this.userService.userLogged.$key == undefined" appHighlightmenu>
           <a href="#"	[routerLink]="['/signin']" routerLinkActive="active">
-            <span *ngIf="this.userService.userLogged.$key == undefined">Sign In</span>
-            <!--<span *ngIf="this.userService.userLogged.$key != undefined">Logout</span>-->
+            <span>Sign In</span>
           </a>
         </li>
-		<!--
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-		-->
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

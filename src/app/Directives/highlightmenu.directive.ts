@@ -5,25 +5,27 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 })
 export class HighlightmenuDirective {
 
-  private alink: ElementRef;
-
+  private li: ElementRef;
+  
   @HostListener('mouseenter') onMouseEnter(){
       this.highlight(true);
   }
   @HostListener('mouseout') onMouseOuter(){
       this.highlight(false);
   }
+ 
 
-  constructor(alink: ElementRef)
+  constructor(_li: ElementRef)
   {
-    this.alink = alink;
+    this.li = _li;
   }
 
   public highlight(active: boolean){
+    
     if (active)
-      this.alink.nativeElement.class = "active";
+      this.li.nativeElement.className = "active";
     else
-      this.alink.nativeElement.class = "";
+      this.li.nativeElement.className = "";
   }
 
 }
