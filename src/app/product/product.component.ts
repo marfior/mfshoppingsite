@@ -15,7 +15,9 @@ import { UserService } from "../Services/user.service";
 export class ProductComponent implements OnInit {
 
   private addingToCart: boolean = false;
+  private addedToCart: boolean = false;
   private error: boolean = false;
+  private quantityAddedToCart: number = 0;
 
   product: Product = <Product>{};
   productcart: Productcart = <Productcart>{};
@@ -28,7 +30,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
     this.actRoute.params.subscribe(par => {
         let key = par["key"];
 
@@ -49,21 +51,24 @@ export class ProductComponent implements OnInit {
   public addToCart()
   {
       this.addingToCart = true;
-
+      this.quantityAddedToCart = 0;
+      
       this.productcartService.getProductcart(this.productcart)
-                             .take(1)
+                             .take(1)  // only take the first record even after adding to cart
                              .subscribe( (prodcart) => {
                                   if (prodcart == undefined)   // product never added to cart
                                   {
                                       this.productcart.totalprice = (this.product.price * this.productcart.quantity);
-                                      this.productcartService.addProductscart(this.productcart);
+                                      this.productcartService.addProductscart(this.productcart);                                
                                   }
                                   else                        // update the quantity in the cart of the same product
                                   {
                                       prodcart.quantity += this.productcart.quantity;
                                       prodcart.totalprice = (this.product.price * prodcart.quantity);
-                                      this.productcartService.updateProductscart(prodcart);
+                                      this.productcartService.updateProductscart(prodcart);                               
                                   }
+                                  this.quantityAddedToCart = this.productcart.quantity;
+                                  this.addedToCart = true;
 
                             },(err) => this.error = true                                    
                             ,() => this.addingToCart = false);

@@ -5,6 +5,10 @@
 			An Error occurred trying to add product to cart. Please try again!
 		</div>
 
+    <div id="successAddedToCart" [hidden]="!this.addedToCart" class="alert alert-success">
+			<strong>{{quantityAddedToCart}}</strong> have been added to the cart
+		</div>
+
     <div class="col-md-6" *ngIf="product.$key != undefined">
       <img src="../assets/images/products/{{product?.$key}}.jpg" alt="Sorry no image available">
     </div>
@@ -16,15 +20,18 @@
         <div class="panel-footer">{{product?.price | currency:'EUR':true}}</div>
       </div>
       
-      <div class="alert alert-info" *ngIf="this.userService.userLogged.$key == undefined">
+      <div id="infoRegisterToBuy" class="alert alert-info" [hidden]="this.userService.userLogged.$key == undefined">
         Please register and login to be able to buy this product!
       </div>
 
       <div *ngIf="this.userService.userLogged.$key != undefined">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <input class="form-control" type="number" value="1" min="1" [(ngModel)]="productcart.quantity"  >
           </div>
-          <div class="col-md-8">
+          <div class="col-md-3">
+            <label>{{productcart.quantity * product?.price | currency:'EUR':true}}</label>
+          </div>
+          <div class="col-md-6">
             <button class="btn-primary form-control" type="submit" [disabled]="productcart.quantity <= 0 || this.addingToCart" 
               (click)="addToCart()">Add to Cart</button>
           </div>
