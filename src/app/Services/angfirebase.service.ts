@@ -23,6 +23,11 @@ export class AngfirebaseService {
                              // .map(responseObj => responseObj.json() );
   }
 
+  push(url: string, value: any)
+  {
+    return this.list(url,undefined).push(value);
+  }
+
   object(url: string, query: Object)
   {
       return this.af.database.object(url, query);

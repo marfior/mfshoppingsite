@@ -18,7 +18,13 @@ export class OrderService {
   }
 
   public addOrder(order: Order){
-      return this.listOrders("",undefined).push(order);
+      //return this.listOrders("",undefined).push(order)
+      return this.afs.push('/orders/',order)
+                      .then( 
+                            (key) => {
+                              return <string>key.path.o[1];
+                             }
+                          );
   }
 
   public addItemOrder(order: Order, productcart: Productcart){
