@@ -35,8 +35,7 @@ export class HeaderComponent implements OnInit {
 
   onStartSearch()
   {
-    if (this.productNameTerm.length == 0)
-      this.router.navigateByUrl('productlist');
+    this.router.navigateByUrl('productlist');
   }
 
   onSearch()
