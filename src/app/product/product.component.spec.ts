@@ -116,6 +116,7 @@ describe('ProductComponent', () => {
                                                                           (userService : UserService) => {
     userService.userLogged.$key = undefined;
 
+    fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
 
     expect(compiled.querySelector('#infoRegisterToBuy').hasAttribute('hidden')).toEqual(false);
