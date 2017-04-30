@@ -15,6 +15,7 @@ export class ProductlistComponent implements OnInit {
    private arrProducts = [];
 
    private category: string;
+   private searchterm: string;
 
    constructor(private productService: ProductService,private actRoute: ActivatedRoute) { 
       
@@ -22,9 +23,10 @@ export class ProductlistComponent implements OnInit {
                         .debounceTime(500)
                         .distinctUntilChanged()
                         .subscribe(term => {
+                          this.searchterm = (<string>term).toLowerCase();
                           this.productService.searchProducts(term)
                                              .subscribe(arrResults => {
-                                                this.arrProducts = arrResults;
+                                                this.arrProducts = arrResults.filter(p => p.name.toLowerCase().includes(this.searchterm));
                                               })
                                             });
 
