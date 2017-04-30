@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 
 import { Order } from "../Services/Models/order"
 import { Product } from "../Services/Models/product";
+
+import { Productcart } from "../Services/Models/productcart";
 import { ProductService } from "../Services/product.service";
 import { ProductcartService } from "../Services/productcart.service";
 import { OrderService } from "../Services/order.service";
@@ -15,8 +17,8 @@ import { UserService } from "../Services/user.service";
 })
 export class ShoppingcartComponent implements OnInit {
 
-  private arrProductscart = [];
-  private arrProducts = [];
+  private arrProductscart: Productcart[] = [];
+  private arrProducts: Product[] = [];
 
   private checkingOut: boolean = false;
   private error: boolean = false;
@@ -55,27 +57,31 @@ export class ShoppingcartComponent implements OnInit {
   }
 
 
-  private removeProduct(productcartkey: string)
+  public removeProductcart(productcartkey: string)
   {
     this.productcartService.removeProductcart(productcartkey);
   }
 
-  private checkOut()
+  public checkOut()
   {
     this.checkingOut = true;
 
-    this.order.checkoutdate = new Date().toLocaleDateString();
-
-    this.order.$key = this.orderService.addOrder(this.order).key;
-
-    this.arrProductscart.forEach((pc) => {
+    this.order.checkoutdate = new Date().toLocaleDateString();   
+    
+    this.orderService.addOrder(this.order).then( (key) =>
+    {
+      this.order.$key = key;
+      this.arrProductscart.forEach((pc) => {
       this.orderService.addItemOrder(this.order,pc).then( () =>
         this.productcartService.removeProductcart(pc.$key)
-      );
+        ).then( () => {
+          this.checkingOut = false;
+          this.router.navigateByUrl('order/'+this.order.$key);
+        });
+      });
     });
 
-    this.checkingOut = false;
-    this.router.navigateByUrl('order/'+this.order.$key);
+    
   }
 
 

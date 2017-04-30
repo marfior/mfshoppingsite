@@ -1,11 +1,12 @@
 <div class="container" >
   <h4>Shopping cart</h4>
   
-  <div class="alert alert-info" *ngIf="userService.userLogged.$key == undefined">
+  <div id="warningLoginToViewCart" class="alert alert-info" [hidden]="userService.userLogged.$key != undefined">
     Please register and login to be able to buy products and view the cart!
   </div>
 
-  <div class="alert alert-info" *ngIf="userService.userLogged.$key != undefined && arrProductscart.length == 0">
+  <div id="infoNoProductsInCart" class="alert alert-info" 
+      [hidden]="!(userService.userLogged.$key != undefined && arrProductscart.length == 0)">
     There are no products in the cart
   </div>
 
@@ -35,7 +36,7 @@
       <td>{{product?.price | currency:'EUR':true}}</td>
       <td>{{productcart?.quantity}}</td>
       <td>{{productcart?.totalprice | currency:'EUR':true}}</td>
-      <td><span class="glyphicon glyphicon-remove" (click)="removeProduct(productcart.$key)" style="cursor: pointer;"></span></td>
+      <td><span class="glyphicon glyphicon-remove" (click)="removeProductcart(productcart.$key)" style="cursor: pointer;"></span></td>
     </tr>
 
   </table>
