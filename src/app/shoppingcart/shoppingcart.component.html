@@ -35,7 +35,7 @@
       <td>{{product?.price | currency:'EUR':true}}</td>
       <td>{{productcart?.quantity}}</td>
       <td>{{productcart?.totalprice | currency:'EUR':true}}</td>
-      <td><span class="glyphicon glyphicon-remove" (click)="removeProduct(productcart.$key)"></span></td>
+      <td><span class="glyphicon glyphicon-remove" (click)="removeProduct(productcart.$key)" style="cursor: pointer;"></span></td>
     </tr>
 
   </table>
@@ -46,7 +46,7 @@
     
     <div class="col-md-3 col-md-offset-9">
       <div class="panel panel-default">
-        <div class="panel-heading">Subtotal price</div>
+        <div class="panel-heading">Order total price</div>
         <div class="panel-body">{{order.totalprice | currency:'EUR':true}}</div>
       </div>
     </div>
