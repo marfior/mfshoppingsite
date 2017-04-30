@@ -16,7 +16,7 @@ import { UserService } from "../Services/user.service";
 export class HeaderComponent implements OnInit {
 
   private arrSearchRes = [];
-  private productName: string;
+  public productNameTerm: string;
 
   private countProductscart: number = 0;
 
@@ -35,12 +35,13 @@ export class HeaderComponent implements OnInit {
 
   onStartSearch()
   {
-    this.router.navigateByUrl('productlist');
+    if (this.productNameTerm.length == 0)
+      this.router.navigateByUrl('productlist');
   }
 
   onSearch()
 	{
-    this.productService.search(this.productName);
+    this.productService.search(this.productNameTerm);
   }
 
 }

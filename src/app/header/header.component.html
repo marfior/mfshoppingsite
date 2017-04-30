@@ -14,7 +14,9 @@
         <li appHighlightmenu><a href="#" [routerLink]="['/productlist','tablets']" >Tablets</a></li>
       </ul>
       <div class="form-group navbar-form navbar-left">
-        <input type="text" class="form-control" [(ngModel)]="productName" (mousedown)="onStartSearch()" (input)="onSearch()" placeholder="Search products" >    
+        <input type="text" class="form-control" 
+              [(ngModel)]="productNameTerm" (mousedown)="onStartSearch()" 
+              (input)="onSearch()" placeholder="Search products" >    
       </div>
       
       <ul class="nav navbar-nav navbar-right">
