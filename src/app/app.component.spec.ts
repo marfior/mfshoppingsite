@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 
 let mockRouter = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
 
   let fixture: ComponentFixture<AppComponent>;
   let component: AppComponent;
@@ -25,10 +25,10 @@ fdescribe('AppComponent', () => {
     }).compileComponents()
   });
 
-  beforeEach(inject([Router], (router: Router) => {
+  beforeEach( () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.debugElement.componentInstance;
-  }));
+  });
 
   it('should create the app', async(() => {
       expect(component).toBeTruthy();

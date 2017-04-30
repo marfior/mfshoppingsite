@@ -17,11 +17,6 @@ import {Observable} from 'rxjs/Observable';
 let fakeUserService = jasmine.createSpyObj('UserService',['getUserByEmail']);
 let fakeRouter = jasmine.createSpyObj('Router', ['navigateByUrl']);
 
-/*@Component({
-  template: ''
-})
-class FakeRegisterComponent { }*/
-
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -42,11 +37,11 @@ describe('SigninComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(inject([UserService, Router], (userService : UserService, router: Router) => {
+  beforeEach( () => {
     fixture = TestBed.createComponent(SigninComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

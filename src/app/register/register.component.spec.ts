@@ -33,11 +33,11 @@ describe('RegisterComponent', () => {
     .compileComponents();
   }));
 
-  beforeEach(inject([UserService, Router], (userService : UserService, router: Router) => {
+  beforeEach( () => {
     fixture = TestBed.createComponent(RegisterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -66,7 +66,7 @@ describe('RegisterComponent', () => {
       expect(compiled.querySelector('#errEmailTaken').hasAttribute('hidden')).toEqual(false);
   }) ) ;
 
-  it('should try to add a non existing user and route to home page', async( ()=> {
+  it('should try to add a non existing user - call addUser and route to home page', async( ()=> {
 
       fakeUserService.getUserByEmail.and.returnValue(Observable.of(null));
    
@@ -74,10 +74,10 @@ describe('RegisterComponent', () => {
       component.onSubmit(registerForm);
       fixture.detectChanges();
 
+      expect(fakeUserService.addUser).toHaveBeenCalled();
+
       const navurl = fakeRouter.navigateByUrl.calls.first().args[0];
       expect(navurl).toBe('home');
-  }) ) ;
-
- 
+  }) ) ; 
 
 });
